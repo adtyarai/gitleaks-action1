@@ -31,14 +31,8 @@ runs:
       with:
         fetch-depth: 0
 
-    - name: Debug File Paths
-      run: |
-        echo "Current Directory:"
-        pwd
-        echo "Files in Directory:"
-        ls -l
-        echo "Files in Action Directory:"
-        ls -l "${{ github.action_path }}"
+    - name: Copy Gitleaks Script to Workspace
+      run: cp "${{ github.action_path }}/gitleaks.sh" .
       shell: bash
 
     - name: Set Execute Permission for Gitleaks Script
