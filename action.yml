@@ -32,9 +32,9 @@ runs:
         fetch-depth: 0
 
     - name: Set Execute Permission for Gitleaks Script
-      run: chmod +x gitleaks.sh
+      run: chmod +x ./gitleaks.sh
       shell: bash
 
     - name: Run Gitleaks Scan
-      run: gitleaks.sh "${{ inputs.github_token }}" "${{ inputs.pull_request_number }}" "${{ inputs.github_repository}}" "${{ inputs.latest_commit}}"
+      run: ./gitleaks.sh "${{ inputs.github_token }}" "${{ inputs.pull_request_number }}" "${{ inputs.github_repository}}" "${{ inputs.latest_commit}}"
       shell: bash
