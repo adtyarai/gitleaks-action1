@@ -1,0 +1,37 @@
+name: 'gitleaks actions'
+description: 'Gitleaks operation which detects secrets on Pull Request commit history'
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  github_token:
+    description: 'GitHub token for authentication'
+    required: true
+  pull_request_number:
+    description: 'Pull request number'
+    required: true
+  github_repository:
+    description: 'Github Repository'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Print Branch Name
+      run: |
+        echo "Branch Name: ${{ github.head_ref }}"
+      shell: bash
+
+    - name: Checkout Code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Set Execute Permission for Gitleaks Script
+      run: chmod +x ./gitleaks.sh
+      shell: bash
+
+    - name: Run Gitleaks Scan
+      run: ./gitleaks.sh "${{ inputs.github_token }}" "${{ inputs.pull_request_number }}" "${{ inputs.github_repository}}"
+      shell: bash
