@@ -14,6 +14,9 @@ inputs:
   github_repository:
     description: 'Github Repository'
     required: true
+  latest_commit:
+    description: 'Latest commit'
+    required: true
 
 runs:
   using: 'composite'
@@ -33,5 +36,5 @@ runs:
       shell: bash
 
     - name: Run Gitleaks Scan
-      run: ./gitleaks.sh "${{ inputs.github_token }}" "${{ inputs.pull_request_number }}" "${{ inputs.github_repository}}"
+      run: ./gitleaks.sh "${{ inputs.github_token }}" "${{ inputs.pull_request_number }}" "${{ inputs.github_repository}}" "${{ inputs.latest_commit}}"
       shell: bash
